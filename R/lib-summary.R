@@ -35,6 +35,14 @@ lib_summary = function(sizes = FALSE) {
   pkg_df
 }
 
+#' Calculate sizes
+#'
+#' @param df a data frame of libraries
+#'
+#' @return a data frame with a lib_size column
+#' @noRd
+#'
+
 calculate_sizes = function(df){
 
   df$lib_size = map_dbl(
