@@ -12,6 +12,7 @@ Provides functions for learning about your R libraries, and the packages they co
 Useful links:
 \itemize{
   \item \url{https://github.com/katiesnyder/libminer}
+  \item \url{https://katiesnyder.github.io/libminer/}
   \item Report bugs at \url{https://github.com/katiesnyder/libminer/issues}
 }
 
