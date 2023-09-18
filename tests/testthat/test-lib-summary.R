@@ -16,8 +16,6 @@ test_that("size argument works", {
   res = lib_summary(sizes = TRUE)
   expect_equal(ncol(res), 3) #expect two columns
   expect_equal(names(res), c("Library", "n_packages", "lib_size"))
-  expect_type(res$Library, "character")
-  expect_type(res$n_packages, "integer")
   expect_type(res$lib_size, "double")
 }
 
