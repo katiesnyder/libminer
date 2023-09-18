@@ -4,16 +4,37 @@
 #' on your machine.
 #'
 #'
+#' @param sizes A logical value indicating whether or calculate sizes. Default `FALSE`.
+#'
 #' @return A `data.frame` containing the count of packages
-#'    in each of the user's libraries.
+#'    in each of the user's libraries. If `sizes = TRUE`,
+#'    a column of library sizes will be added.
 #' @export
 #'
 #' @examples
 #' lib_summary()
-lib_summary = function() {
+#' lib_summary(sizes = TRUE)
+
+lib_summary = function(sizes = FALSE) {
+  #check arguments
+  if (!is.logical(sizes)){
+    stop("Sizes must be logical value (TRUE/FALSE)")
+  }
+
+
   pkgs = utils::installed.packages()
   pkg_table = table(pkgs[, "LibPath"])
   pkg_df = as.data.frame(pkg_table, stringsAsFactors = FALSE)
   names(pkg_df) = c("Library", "n_packages")
+
+  if (isTRUE(sizes)) {
+    pkg_df$lib_size = vapply(
+      pkg_df$Library, function(x){
+        sum(fs::file_size(fs::dir_ls(x, recurse = TRUE)))
+      },
+      FUN.VALUE = numeric(1))
+
+  }
+
   pkg_df
 }
